@@ -5,10 +5,12 @@ import { ListadoHeroesComponent } from './pages/listado-heroes/listado-heroes.co
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { HeroeComponent } from './pages/heroe/heroe.component';
+import { HeroesHomeComponent } from './pages/heroes-home/heroes-home.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: HeroesHomeComponent,
     children: [
       { path: 'listado', component: ListadoHeroesComponent },
       { path: 'agregar', component: AgregarComponent },
