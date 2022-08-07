@@ -8,6 +8,7 @@ import { BuscarComponent } from './pages/buscar/buscar.component';
 import { HeroeComponent } from './pages/heroe/heroe.component';
 import { HeroesHomeComponent } from './pages/heroes-home/heroes-home.component';
 import { ListadoHeroesComponent } from './pages/listado-heroes/listado-heroes.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,11 @@ import { ListadoHeroesComponent } from './pages/listado-heroes/listado-heroes.co
     HeroesHomeComponent,
     ListadoHeroesComponent,
   ],
-  imports: [CommonModule, HeoroesRoutingModule, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    HeoroesRoutingModule,
+    FlexLayoutModule,
+    MaterialModule,
+  ],
 })
 export class HeroesModule {}
