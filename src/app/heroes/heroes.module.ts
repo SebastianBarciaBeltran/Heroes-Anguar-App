@@ -9,6 +9,8 @@ import { HeroeComponent } from './pages/heroe/heroe.component';
 import { HeroesHomeComponent } from './pages/heroes-home/heroes-home.component';
 import { ListadoHeroesComponent } from './pages/listado-heroes/listado-heroes.component';
 import { MaterialModule } from '../material/material.module';
+import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
+import { ImagenPipe } from './pipes/imagen.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { MaterialModule } from '../material/material.module';
     HeroeComponent,
     HeroesHomeComponent,
     ListadoHeroesComponent,
+    HeroeTarjetaComponent,
+    ImagenPipe,
   ],
   imports: [
     CommonModule,
