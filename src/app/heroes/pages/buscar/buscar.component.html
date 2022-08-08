@@ -35,6 +35,36 @@
   </div>
 
   <div>
-    <pre>{{ heroeSeleccionado | json }}</pre>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="30px"
+      *ngIf="heroeSeleccionado"
+    >
+      <div fxFlex="50">
+        <h1>
+          {{ heroeSeleccionado.superhero }}
+          <small>- {{ heroeSeleccionado.alter_ego }}</small>
+        </h1>
+        <mat-divider></mat-divider>
+        <br />
+        <img [src]="heroeSeleccionado | imagen" alt="" />
+      </div>
+
+      <div fxFlex="50">
+        <h1>{{ heroeSeleccionado.publisher }}</h1>
+        <mat-divider></mat-divider>
+
+        <mat-list>
+          <mat-list-item>{{
+            heroeSeleccionado.first_appearance
+          }}</mat-list-item>
+          <mat-list-item>{{ heroeSeleccionado.characters }}</mat-list-item>
+          <mat-list-item>{{ heroeSeleccionado.publisher }}</mat-list-item>
+          <mat-list-item>{{ heroeSeleccionado.alter_ego }}</mat-list-item>
+        </mat-list>
+        <br />
+      </div>
+    </div>
   </div>
 </div>
