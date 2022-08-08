@@ -29,7 +29,6 @@ export class HeroeComponent implements OnInit {
       .subscribe((res) => {
         this.loadingHero = false;
         this.heroe = res;
-        console.log('funcion heroe', res);
       });
   }
 
