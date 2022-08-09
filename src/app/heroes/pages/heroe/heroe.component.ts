@@ -28,7 +28,7 @@ export class HeroeComponent implements OnInit {
       .pipe(switchMap(({ id }) => this.heroesService.getHeroe(id)))
       .subscribe((res) => {
         this.loadingHero = false;
-        this.heroe = res;
+        this.heroe = { ...res };
       });
   }
 

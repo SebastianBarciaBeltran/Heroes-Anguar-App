@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { DialogConfirmDeleteHeroeComponent } from '../../components/dialog-confirm-delete-heroe/dialog-confirm-delete-heroe.component';
 import { Heroe, Publisher } from '../../interfaces/heroe.interfaces';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -27,11 +30,15 @@ export class AgregarComponent implements OnInit {
   constructor(
     private heroeService: HeroesService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.heroeEditar();
+    if (this.router.url.includes('editar')) {
+      this.heroeEditar();
+    }
   }
 
   guardar() {
@@ -42,11 +49,12 @@ export class AgregarComponent implements OnInit {
     if (this.heroe.id) {
       // actualizamos
       this.heroeService.setEditHero(this.heroe).subscribe((res) => {
-        this.router.navigate(['/heroes/listado']);
+        this.openSnackBar('Registro actualizado correctamente');
       });
     } else {
       // insertamos
       this.heroeService.setNewHero(this.heroe).subscribe((res) => {
+        this.openSnackBar('Registro creado correctamente');
         this.router.navigate(['/heroes/listado']);
       });
 
@@ -65,7 +73,39 @@ export class AgregarComponent implements OnInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.heroeService.getHeroe(id)))
       .subscribe((res) => {
-        this.heroe = res;
+        this.heroe = { ...res };
       });
+  }
+
+  eliminarHeroe() {
+    const dialog = this.dialog.open(DialogConfirmDeleteHeroeComponent, {
+      width: '350px',
+      data: { ...this.heroe },
+    });
+
+    dialog.afterClosed().subscribe((res) => {
+      if (res) {
+        this.heroeService.deleteHero(this.heroe.id!).subscribe((res) => {
+          this.router.navigate(['/heroes/listado']);
+        });
+      }
+    });
+
+    dialog
+      .afterClosed()
+      .pipe(
+        switchMap((res) => {
+          return res
+            ? this.heroeService.deleteHero(this.heroe.id!)
+            : this.router.navigate([`/heroes/editar/`, this.heroe.id!]);
+        })
+      )
+      .subscribe();
+  }
+
+  openSnackBar(mensaje: string): void {
+    this._snackBar.open(mensaje, 'ok', {
+      duration: 2500,
+    });
   }
 }

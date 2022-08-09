@@ -33,7 +33,7 @@ export class BuscarComponent implements OnInit {
       this.termino = this.heroe.superhero;
 
       this.heroesService.getHeroe(this.heroe.id!).subscribe((res) => {
-        this.heroeSeleccionado = res;
+        this.heroeSeleccionado = { ...res };
       });
     }
   }

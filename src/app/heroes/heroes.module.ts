@@ -13,6 +13,7 @@ import { MaterialModule } from '../material/material.module';
 import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
 import { ImagenPipe } from './pipes/imagen.pipe';
 import { HeroesService } from './services/heroes.service';
+import { DialogConfirmDeleteHeroeComponent } from './components/dialog-confirm-delete-heroe/dialog-confirm-delete-heroe.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HeroesService } from './services/heroes.service';
     ListadoHeroesComponent,
     HeroeTarjetaComponent,
     ImagenPipe,
+    DialogConfirmDeleteHeroeComponent,
   ],
   imports: [
     CommonModule,
