@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Heroe } from '../interfaces/heroe.interfaces';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class HeroesService {
   private baseUrl: string = environment.baseUrl;
 
@@ -28,5 +26,15 @@ export class HeroesService {
     const url: string = `${this.baseUrl}/heroes?q=${termino}&_limit=4`;
 
     return this.http.get<Heroe[]>(url);
+  }
+
+  setNewHero(heroe: Heroe): Observable<Heroe> {
+    const url: string = `${this.baseUrl}/heroes`;
+    return this.http.post<Heroe>(url, heroe);
+  }
+
+  setEditHero(heroe: Heroe): Observable<Heroe> {
+    const url: string = `${this.baseUrl}/heroes/${heroe.id}`;
+    return this.http.put<Heroe>(url, heroe);
   }
 }

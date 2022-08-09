@@ -20,7 +20,7 @@ export class BuscarComponent implements OnInit {
 
   buscando() {
     this.heroesService.getSugerencias(this.termino.trim()).subscribe((res) => {
-      this.heroes = res;
+      this.heroes = [...res];
     });
   }
 
